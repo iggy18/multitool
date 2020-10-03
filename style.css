@@ -1,0 +1,154 @@
+/* font-family: 'Heebo', sans-serif; */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: 0 !important;
+}
+
+
+body{
+    background-image: linear-gradient(100deg, green, lightgrey);
+    font-family: 'Heebo', sans-serif;
+    color: white;
+    min-height: 100vh;
+}
+
+header{
+    font-size: 1.5rem;
+}
+
+
+/* ---------------------------------------------this makes a goodlooking box */
+header,form{
+    min-height: 20vh;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}
+
+form input,form button{
+    padding:0.8rem;
+    font-size: 2rem;
+    border: none;
+    background: white;
+    box-shadow: 10px 10px 8px 0px rgba(0,0,0,0.20);
+}
+
+form button{
+    color: green;
+    background:white;
+}
+
+form button:hover{
+    background:green;
+    color:white;
+}
+/* -----------------------------------------------------this makes a good looking box  */
+.todoContainer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todoList{
+    min-width: 30%;
+    list-style: none; /*<----------- removes dots from list items*/
+}
+
+.todo{
+    margin:0.5rem;
+    background: white;
+    color: green;
+    font-size: 1.5rem;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 10px 10px 8px 0px rgba(0,0,0,0.20);
+    margin: 15px;
+    padding-left: 8px;
+}
+
+.todo li{
+    flex: 1; /*squishes buttons to one side of box*/
+}
+
+.complete, .delete{
+    background:white;
+    color: green;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    outline: none;
+}
+
+.complete:hover{
+    color:white;
+    background: green;
+}
+
+.delete{
+    color: red;
+}
+
+.delete:hover{
+    color: white;
+    background: red;
+}
+
+.fa-minus-circle, .fa-check{ /*MAKES IT SO ICONS CAN'T BE CLICKED SO YOU CAN CLICIK WHOLE BUTTON*/
+    pointer-events: none;
+}
+
+.completed {                                         /*waits for class to be added plays animation*/
+    text-decoration: line-through;
+    opacity: 0.4;
+    transition: all 1.5s ease-in-out;
+}
+
+.fall{
+    transition: all 1.5s ease-in-out;
+    transform: translateY(9rem) rotateZ(40deg);
+    opacity: 0;
+}
+
+/* clock stuff below here  */
+
+#clock {
+    min-height: 15vh;
+    padding-left: 15px;
+    padding-top:15px ;
+    background: rgba(0,0,0,0.3)
+    
+}
+
+.date{
+    position: absolute;
+    font-size: .9rem;
+    padding-left: .5rem;
+    margin-top: 6px;
+}
+
+.time{
+    margin-top: 18px;
+    font-size: 3rem;
+    padding-left: .4rem;
+}
+
+#am{
+    font-size: .9rem;
+    background: rgba(153, 153, 153, 0.4);
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 3px;
+    margin-top: 30px;
+    position: absolute;
+}
+#minutes {
+    margin-left: -12px;
+}

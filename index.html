@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TO DO</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500;900&display=swap" rel="stylesheet">
+    <script src="https://use.fontawesome.com/f4ff0b44d3.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+                                      <!-- clock -->
+<body onload="currentWorld();">
+    <div id="clock">
+        <div class="date">
+            <span id="dayName">dayname</span>,
+            <span id="month">monthname</span>
+            <span id="dayNumber">00</span>,
+            <span id="year">year</span>
+        </div>
+        <div class="time">
+            <span id="hour">00</span>:
+            <span id="minutes">00</span>
+            <span id="am">AM</span>
+        </div>
+    </div>
+
+                                     <!-- to do list -->
+    <header>
+        <h1> Seth's to do list </h1>
+    </header>
+    <form>
+        <input type="text" class="input">
+        <button class="todoButton" type="submit">
+            <i class="fas fa fa-plus"></i>
+        </button>
+    </form>
+
+    <div class="todoContainer">
+        <ul class="todoList"></ul>
+    </div>
+
+
+
+
+
+    <script src="app.js" async defer></script>
+</body>
+
+</html>
