@@ -2,6 +2,11 @@
 const todoInput = document.querySelector('.input'); //<----------get these from html doc to make available for JS FILE
 const todoButton = document.querySelector('.todoButton');
 const todoList = document.querySelector('.todoList');
+const body = document.querySelector('body');
+const api = {
+    key: "5ae61908d029eac552247f920fb8dd44",
+
+}
 
 // date, time, and weather
 function getCurrentWorld() {  // <---------------------------------------------------clock object -------- this is where clock starts
@@ -13,7 +18,6 @@ function getCurrentWorld() {  // <----------------------------------------------
         hour = now.getHours(),
         minute = now.getMinutes(),
         m = "AM";
-
     if (hour == 0) { // <-----hour is midnight instead of 0 o'clock
         hour = 12
     }
@@ -21,15 +25,18 @@ function getCurrentWorld() {  // <----------------------------------------------
         hour = hour - 12;
         m = "PM";
     }
+    if (hour > 6 && m === "PM") {
+        body.classList.add('darkMode')
+    }
 
-    Number.prototype.pad = function(digits){ //<---------------------- add zero in clock show one digit number 
-        for(var n = this.toString(); n.length < digits; n = 0 + n);
+    Number.prototype.pad = function (digits) { //<---------------------- add zero in clock show one digit number 
+        for (var n = this.toString(); n.length < digits; n = 0 + n);
         return n;
     }
     // getMonth returns the number of the month, create an array of names to use. same for days 
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-    
+
     // id's are tagged in HTML file.
     let ids = ["dayName", "month", "dayNumber", "year", "hour", "minutes", "am"];
     // values should line up with id's above
@@ -73,17 +80,17 @@ function addTodo(event) { // <----------------------- fires all this off when cl
     todoInput.value = ""; //<--------------------------------------clears input bar when button is clicked
 }
 
-function deletecheck (event){ //<---------------------------------------deletes item
+function deletecheck(event) { //<---------------------------------------deletes item
     const clicked = event.target;
     const newTodo = clicked.parentElement;
-    if (clicked.classList[0] === 'delete'){
+    if (clicked.classList[0] === 'delete') {
         newTodo.classList.add('fall');
-        newTodo.addEventListener('transitionend', function(){
+        newTodo.addEventListener('transitionend', function () {
             newTodo.remove();
         });
     }
-    
-    if(clicked.classList[0] === 'complete') { //<---------------------------toggles completd classlist which "activates" CSS selctor waiting for it
+
+    if (clicked.classList[0] === 'complete') { //<---------------------------toggles completd classlist which "activates" CSS selctor waiting for it
         newTodo.classList.toggle('completed');
     }
 }
