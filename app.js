@@ -110,7 +110,7 @@ function deletecheck(event) { //<---------------------------------------deletes 
 }
 
 function addGetbutton() {
-    if (localStorage.getItem("todos").length > 4){
+    if (localStorage.getItem("todos")){
         const getListButton = document.createElement('button');
         getListButton.innerHTML = "get my list";
         getListButton.classList.add('getListButton')
