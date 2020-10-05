@@ -6,12 +6,15 @@ const body = document.querySelector('body');
 const ghost = document.querySelector('.ghost');
 
 // const api = {
-//     key: "5ae61908d029eac552247f920fb8dd44",
-
-// }
-
-// date, time, and weather
-function getCurrentWorld() {  // <---------------------------------------------------clock object -------- this is where clock starts
+    //     key: "5ae61908d029eac552247f920fb8dd44",
+    
+    // }
+    
+    function test() {
+        console.log('this works');
+    }
+    // date, time, and weather
+    function getCurrentWorld() {  // <---------------------------------------------------clock object -------- this is where clock starts
     let now = new Date(),
         dayName = now.getDay(), // <------------------declair property that is inbuilt function for time data
         month = now.getMonth(),
@@ -107,87 +110,77 @@ function deletecheck(event) { //<---------------------------------------deletes 
 }
 
 function addGetbutton() {
-    if (localStorage.getItem("todos") !== null) {
+    if (localStorage.getItem("todos").length > 4){
         const getListButton = document.createElement('button');
         getListButton.innerHTML = "get my list";
         getListButton.classList.add('getListButton')
         ghost.appendChild(getListButton);
     }
-    if (localStorage.getItem("todos") === null)
-    getListButton.innerHTML = "you have no list"
 }
 
-addGetbutton();
+    addGetbutton();
 
-// function removeGetbutton() {
-//     if (localStorage.getItem("todos") === null){
-//         let button = getElementbyClass('.getListButton');
-//         button.remove();
-//     }
-// }
-
-
-function saveTodos(todo) {                            //<------------------------- save to local storage (todo) is created up top
-    let keepTodos;
-    if (localStorage.getItem("todos") === null) { //<-------------------------- checks to see if there is anything in local storage, if not an array is created
-        keepTodos = [];
-    } else {
-        keepTodos = JSON.parse(localStorage.getItem("todos")); //<-------------------if there is already an array, get it
+    function saveTodos(todo) {                            //<------------------------- save to local storage (todo) is created up top
+        let keepTodos;
+        if (localStorage.getItem("todos") === null) { //<-------------------------- checks to see if there is anything in local storage, if not an array is created
+            keepTodos = [];
+        } else {
+            keepTodos = JSON.parse(localStorage.getItem("todos")); //<-------------------if there is already an array, get it
+        }
+        keepTodos.push(todo);
+        localStorage.setItem("todos", JSON.stringify(keepTodos)); // <---------------------strigify the array
     }
-    keepTodos.push(todo);
-    localStorage.setItem("todos", JSON.stringify(keepTodos)); // <---------------------strigify the array
-}
 
-function test() {
-    console.log('this works');
-}
 
-function fetchTodos() {
-    let keepTodos;
-    if (localStorage.getItem("todos") === null) { //<-------------------------- checks to see if there is anything in local storage, if not an array is created
-        keepTodos = [];
-    } else {
-        keepTodos = JSON.parse(localStorage.getItem("todos")); //<-------------------if there is already an array, get it
+    function fetchTodos() {
+        let keepTodos;
+        // if (todo){
+        //     return;
+        // }
+        if (localStorage.getItem("todos") === null) { //<-------------------------- checks to see if there is anything in local storage, if not an array is created
+            keepTodos = [];
+        } else {
+            keepTodos = JSON.parse(localStorage.getItem("todos")); //<-------------------if there is already an array, get it
+        }
+        keepTodos.forEach(function (todo) { //<-------------------------------------THIS IS recycled code from the top still imside fetchtodos
+            const todoDiv = document.createElement('div'); //<------------------------(((creates todo DIV)))
+            todoDiv.classList.add('todo');                 //adds todo classlist for styling in css
+
+            const newTodo = document.createElement('li'); //<---------- creates new todo list item
+            newTodo.innerText = todo; ///<---------------------------------------innertext removed replaced with todo, because todo already exists.
+            newTodo.classList.add('todo-Item'); //<<-------------- adds classlist to item
+            todoDiv.appendChild(newTodo);
+
+            const completedButton = document.createElement('button');//<-------((((makes complete button))))
+            completedButton.innerHTML = '<i class="fas fa fa-check"></i>';//<---------inner HTML inserts HTML into the page
+            completedButton.classList.add('complete');
+            todoDiv.appendChild(completedButton); // <------------------------((((sticks complete button to todo div)))
+
+            const deleteButton = document.createElement('button');//<------- makes delete button
+            deleteButton.innerHTML = '<i class="fas fa fa-minus-circle"></i>'; //<-------adds icon HTML to page
+            deleteButton.classList.add('delete');
+            todoDiv.appendChild(deleteButton); //<----------------------------sticks delete Button to todo DIV
+
+            todoList.appendChild(todoDiv); //<---------------------------- sticks .this new todo list item to UL in HTML
+        });
+
+        // removeGetbutton();
     }
-    keepTodos.forEach(function (todo) { //<-------------------------------------THIS IS recycled code from the top still imside fetchtodos
-        const todoDiv = document.createElement('div'); //<------------------------(((creates todo DIV)))
-        todoDiv.classList.add('todo');                 //adds todo classlist for styling in css
 
-        const newTodo = document.createElement('li'); //<---------- creates new todo list item
-        newTodo.innerText = todo; ///<---------------------------------------innertext removed replaced with todo, because todo already exists.
-        newTodo.classList.add('todo-Item'); //<<-------------- adds classlist to item
-        todoDiv.appendChild(newTodo);
-
-        const completedButton = document.createElement('button');//<-------((((makes complete button))))
-        completedButton.innerHTML = '<i class="fas fa fa-check"></i>';//<---------inner HTML inserts HTML into the page
-        completedButton.classList.add('complete');
-        todoDiv.appendChild(completedButton); // <------------------------((((sticks complete button to todo div)))
-
-        const deleteButton = document.createElement('button');//<------- makes delete button
-        deleteButton.innerHTML = '<i class="fas fa fa-minus-circle"></i>'; //<-------adds icon HTML to page
-        deleteButton.classList.add('delete');
-        todoDiv.appendChild(deleteButton); //<----------------------------sticks delete Button to todo DIV
-
-        todoList.appendChild(todoDiv); //<---------------------------- sticks .this new todo list item to UL in HTML
-    });
-
-    // removeGetbutton();
-}
-
-function removeLocalTodo(todo){
-    let todos;
-    if (localStorage.getItem("todos") === null){
-        todos = [];
-    } else {
-        todos = JSON.parse(localStorage.getItem("todos"));
+    function removeLocalTodo(todo) {
+        let todos;
+        if (localStorage.getItem("todos") === null) {
+            todos = [];
+        } else {
+            todos = JSON.parse(localStorage.getItem("todos"));
+        }
+        const todoindex = todo.children[0].innerText;
+        todos.splice(todos.indexOf(todoindex), 1);
+        localStorage.setItem("todos", JSON.stringify(todos));
     }
-    const todoindex = todo.children[0].innerText;
-    todos.splice(todos.indexOf(todoindex), 1);
-    localStorage.setItem("todos", JSON.stringify(todos));
-}
 
-// event listeners
-todoButton.addEventListener('click', addTodo); //<-------------- these listen to the quesry selected global const declaired up top 
-todoList.addEventListener('click', deletecheck);
-ghost.addEventListener('click', fetchTodos);
+    // event listeners
+    todoButton.addEventListener('click', addTodo); //<-------------- these listen to the quesry selected global const declaired up top 
+    todoList.addEventListener('click', deletecheck);
+    ghost.addEventListener('click', fetchTodos);
 
